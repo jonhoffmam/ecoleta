@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api'
+import { FiArrowLeft, FiCheckCircle, FiXCircle } from 'react-icons/fi';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import api from '../../services/api';
 
@@ -47,6 +47,8 @@ const CreatePoint = () => {
 		whatsapp: ''
 	});
 	const history = useHistory();
+	const [clicked, setClicked] = useState(false);
+	const [seconds, setSeconds] = useState(10);
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(position => {			
@@ -55,8 +57,8 @@ const CreatePoint = () => {
 				lng: position.coords.longitude
 			}
 
-			setInitialPosition(latLng)
-			setSelectedPosition(latLng)
+			setInitialPosition(latLng);
+			setSelectedPosition(latLng);
 		})      
 	}, []);  
 	
@@ -74,7 +76,7 @@ const CreatePoint = () => {
 	}, []);
 
 	useEffect(() => {
-		if ( selectedUf === '0' ){ 
+		if ( selectedUf === '0' ) { 
 			return 
 		}
 
@@ -86,6 +88,23 @@ const CreatePoint = () => {
 		});
 
 	}, [selectedUf]);
+
+	useEffect(() => {   
+
+    if (clicked && seconds > 0) {
+      setTimeout(() => {
+        setSeconds(seconds - 1);
+      }, 1000);
+    } else if (!clicked) {
+      setSeconds(10);
+    } else if (seconds === 0) {
+			setClicked(!clicked);
+			setTimeout(() => history.push('/'))
+    } else {      
+      setClicked(clicked);      
+    }
+    
+  }, [seconds, clicked, history]);
 
 	function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
 		const uf = event.target.value;
@@ -120,10 +139,10 @@ const CreatePoint = () => {
 
 		if (alreadyItems >= 0) {
 			const filteredItems = selectedItems.filter(item => item !== id);
-			console.log('Item desselecionado:', id);
+
 			setSelectedItems(filteredItems);
 		} else {
-			console.log('Item selecionado:', id);
+			
 			setSelectedItems([...selectedItems, id]);
 		}
 	}
@@ -155,12 +174,9 @@ const CreatePoint = () => {
 				data.append('image', image);
 			}
 
-		
 		await api.post('points', data);
-		console.log(data);
-		alert('Ponto de coleta criado!');
-
-		history.push('/');
+		
+		setClicked(!clicked);		
 	}
 
 	return (
@@ -286,12 +302,27 @@ const CreatePoint = () => {
 							</li>
 							))}              
 						</ul>
-					</fieldset>
+					</fieldset>					
 				
 					<button type="submit">
 						Cadastrar ponto de Coleta
-					</button>  
-				</form>   
+					</button>
+				</form>
+				
+			{clicked ?
+					<div className="containerFinal">
+						<FiCheckCircle className="iconFinal" />
+						<p className="messageFinal">Cadastro concluído!</p>
+						<p className="secondsFinal">Você será redirecionado para a página inicial em <strong style={{color: '#2FB86E'}}>{seconds}</strong> {seconds === 1 ? 'segundo' : 'segundos'}!</p>
+						<Link className="buttonCloseFinal" to="/">
+							<span>
+								<FiXCircle />
+							</span>
+								<strong>Fechar</strong>
+						</Link>
+					</div> 
+				: ''
+			}
 		</div>
 	)
 }
