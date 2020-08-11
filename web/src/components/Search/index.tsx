@@ -5,6 +5,7 @@ import { MdLocationCity } from 'react-icons/md';
 import axios from 'axios';
 
 import { zipCodeMask } from '../../components/Masks';
+import './styles.css';
 
 interface UF {
 	id: number;
@@ -17,8 +18,6 @@ interface city {
 	id: number;
 	nome: string;
 }
-
-
 
 const Search = (props: any) => {
 	const [ufs, setUfs] = useState<UF[]>([]);
@@ -144,10 +143,13 @@ const Search = (props: any) => {
 	return (
 
 		clickedSearch ?
-			<div className="containerFinal">
+			<div className="containerSearch">
+				
+				<span className="buttonCloseUp" onClick={() => {setClickedSearch(!clickedSearch); props.onClick()}} ><FiX /></span>
+				
 				
 				<fieldset>
-					<p className="messageFinal">Pesquisar ponto de coleta</p>							 
+					<p>Escolha como deseja pesquisar:</p>							 
 				
 					<ul>
 							<li
@@ -238,26 +240,30 @@ const Search = (props: any) => {
 
 							<button
 								disabled={
-									selectedTypeAdress[0] > 0 ? false : true}
-								className={selectedTypeAdress[0] > 0 ? 'buttonSearch' : 'buttonDisable'}
+									selectedTypeAdress[0] > 0 && selectedAdress !== '' ? false : true}
+								className={selectedTypeAdress[0] > 0 && selectedAdress !== '' ? 'buttonSearch' : 'buttonDisable'}
 								onClick={handleSearch}
 							>
 								<span>
 									<FiSearch />
 								</span>
-								<strong>Pesquisar</strong>
+								<strong>
+								{selectedTypeAdress[0] > 0 && selectedAdress !== '' ?
+									'Pesquisar' : selectedTypeAdress[0] > 0 ? 'Carregando...' : 'Pesquisar'
+								}
+								</strong>
 
 							</button>
 							
-							<button										
+							{/* <button										
 								className="buttonClose" 
 								onClick={() => {setClickedSearch(!clickedSearch); props.onClick()}}
-							>							
+							>
 								<span>
 									<FiX />
-								</span>							
+								</span>
 								<strong>Fechar</strong>
-							</button>								
+							</button> */}
 			</div>
 		: <div></div>
 	)

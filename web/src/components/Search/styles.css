@@ -1,0 +1,317 @@
+.containerSearch {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(14,10,20,0.95);
+
+	margin: auto;
+	position: fixed;
+	top: 0;
+	left: 0;
+	justify-content: center;
+	align-items: center;
+	
+	transition: background 0.2s, color 0.2s;
+}
+
+.containerSearch p {
+	text-align: center;
+	font-weight: bold;
+	font-size: 30px;  
+	color: #CCC;
+	margin: 20px 0 30px 0;
+}
+
+.containerSearch .buttonCloseUp svg {
+	width: 30px;
+	height: 30px;
+	color: #FFF;
+
+	top: 40px;
+	left: 90%;
+	position: absolute;
+	cursor: pointer;
+
+	transition: color 0.2s, width 0.2s, height 0.2s;
+}
+
+.containerSearch .buttonCloseUp:hover svg {
+	width: 32px;
+	height: 32px;
+	
+	color: var(--primary-color);
+}
+
+.containerSearch button {
+	width: 260px;
+	height: 64px;
+	
+	border-radius: 8px;
+	border: 0;
+	text-decoration: none;
+
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+	outline-style: none;
+
+	position: relative;	
+	cursor: pointer;
+}
+
+.containerSearch .buttonDisable:disabled {
+  background-color: #CCC;
+	color: #666;
+	margin-top: 30px;
+	cursor: not-allowed;
+}
+
+.containerSearch .buttonSearch {
+	background: #322153;
+	margin-top: 30px;
+}
+
+.containerSearch .buttonClose {
+	background: var(--primary-color);
+	margin-top: 20px;
+}
+
+.containerSearch button span {
+	width: 64px;
+	height: 64px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;  
+
+	transition: width 0.2s;
+}
+
+.containerSearch .buttonSearch span {
+	background: rgba(0, 0, 0, 0.16);
+}
+
+.containerSearch .buttonClose span,
+.containerSearch .buttonDisable span {
+	background: rgba(0, 0, 0, 0.08);
+}
+
+.containerSearch button span svg {
+	color: #FFF;
+	width: 20px;
+	height: 20px;
+}
+
+.containerSearch .buttonDisable span svg {
+	color: #666;
+	width: 20px;
+	height: 20px;
+}
+
+.containerSearch button strong {
+	flex: 1;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	color: #FFF;
+
+	left: 50%;
+  transition: color 0.2s, left 0.2s;
+}
+
+.containerSearch .buttonSearch:hover span,
+.containerSearch .buttonClose:hover span {
+	width: 100%;
+}
+
+.containerSearch .buttonDisable span {
+	width: 64px;
+}
+
+.containerSearch .buttonDisable strong {
+	flex: 1;
+	text-align: center;
+	font-size: 16px;
+	font-weight: bold;
+	color: #666;
+	left: 49%;
+}
+
+.containerSearch .buttonSearch:hover strong,
+.containerSearch .buttonClose:hover strong {
+	color: rgba(0, 0, 0, 0.0);
+  position: absolute;
+  left: 100%;
+}
+
+.containerSearch fieldset {
+	margin-top: 42px;
+	min-inline-size: auto;
+	border: 0;
+	
+}
+
+.containerSearch .field-group {
+  flex: 1;
+  display: flex;
+}
+
+.containerSearch .field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}
+
+.containerSearch .field-group .field + .field {
+  margin-left: 24px;
+}
+
+.containerSearch .field input[type=text] {
+	flex: 1;
+	background: #F0F0F5;
+	border-radius: 8px;
+	border: 0;
+	padding: 16px 24px;
+	font-size: 16px;
+	color: #6C6C80;
+
+	outline-style: none;
+}
+
+.containerSearch .field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  
+  background: #F0F0F5;
+  border-radius: 8px;
+  border: 0;
+  padding: 16px 24px;
+  font-size: 16px;
+	color: #6C6C80;
+	
+	outline-style: none;
+	cursor: pointer;
+}
+
+.containerSearch .field input::placeholder {
+  color: #A0A0B2;
+}
+
+.containerSearch .field label {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+/* ORGAZINAR */
+
+.containerSearch form {	
+	border-radius: 8px;
+}
+
+.containerSearch ul {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 96px;
+	list-style: none;
+}
+
+.containerSearch li {
+	background: #f5f5f5;
+	border: 2px solid #f5f5f5;
+	width: 96px;
+	height: 96px;
+	border-radius: 8px;	
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	text-align: center;
+
+	position: relative;
+
+	cursor: pointer;	
+}
+
+.containerSearch li span {	
+	width: 100%;
+	height: 0;
+	border-radius: 6px;
+	top: 0;
+
+	color: rgba(0, 0, 0, 0);
+	background: rgba(0, 0, 0, 0);
+
+	position: absolute;	
+
+	text-align: center;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;	
+
+	transition: height 0.2s, background 0.2s;
+}
+
+.containerSearch li span strong {
+	text-align: center;	
+}
+
+.containerSearch li:hover span {	
+	background: #E1FAEC;
+	height: 100%;	
+}
+
+.containerSearch li.selected {
+	border: 2px solid #34CB79;
+}
+
+.containerSearch li.selected span {	
+	background: #E1FAEC;
+	height: 100%;	
+}
+
+.containerSearch li svg {
+	color: #2FB86E;
+	width: 24px;
+	height: 24px;	
+}
+
+.containerSearch li:hover svg {	
+	width: 26px;
+	height: 26px;	
+}
+
+.containerSearch li span svg {	
+	color: rgba(0, 0, 0, 0);
+	
+	top: 26px;
+	width: 24px;
+	height: 24px;	
+
+	position: relative;
+
+	transition: color 0.4s, top 0.6s, width 0.1s, height 0.1s;
+}
+
+.containerSearch li:hover span svg {	
+	color: #2FB86E;
+	top: 0;
+	width: 28px;
+	height: 28px;
+}
+
+.containerSearch li.selected span svg {
+	color: #2FB86E;
+	top: 0;
+	width: 32px;
+	height: 32px;
+}
+
+/* .containerSearch .buttonCloseUp {
+
+} */

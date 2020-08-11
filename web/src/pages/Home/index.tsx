@@ -29,7 +29,7 @@ const Home = () => {
 						<strong>Cadastrar ponto de coleta</strong>
 					</Link>
 
-					<button onClick={() => setOpenSearch(!openSearch)}>
+					<button className="buttonOpenSearch" onClick={() => setOpenSearch(!openSearch)}>
 						<span>							
 							<FiSearch />							
 						</span>
