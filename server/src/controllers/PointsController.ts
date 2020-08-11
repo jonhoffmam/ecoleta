@@ -1,8 +1,12 @@
 import { Request, Response } from 'express';
+import { config } from 'dotenv';
 import knex from '../database/connection';
 
+config();
+const {DB_HOST: urlPath} = process.env;
+
 class PointsController {
-	async index(request: Request, response: Response) {
+	async index(request: Request, response: Response) {		
 		const { city, uf, items } = request.query;    
 
 		const parsedItems = String(items)
@@ -20,7 +24,7 @@ class PointsController {
 		const serializedPoints = points.map(point => {
 			return {
 				...point,
-				image_url: `http://192.168.0.215:3333/uploads/${point.image}`,
+				image_url: `http://${urlPath}:3333/uploads/${point.image}`,
 			}
 		});
 
@@ -38,7 +42,7 @@ class PointsController {
 
 		const serializedPoint = {
 			...point,
-			image_url: `http://192.168.0.215:3333/uploads/${point.image}`,
+			image_url: `http://${urlPath}:3333/uploads/${point.image}`,
 		};
 
 		const items = await knex('items')
