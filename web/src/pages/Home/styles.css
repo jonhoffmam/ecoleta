@@ -1,20 +1,30 @@
 #page-home {
 	height: 100vh;
 
-	background: url('../../assets/home-background.svg') no-repeat 550px bottom;
-	background-position-y: 100px;
+	/* background: url('../../assets/home-background.svg') fixed no-repeat right bottom; */
 }
 
 #page-home .content {
-	width: 100%;
-	height: 100%;
-	max-width: 1100px;
-	margin: 0 auto;
-	padding: 0 30px;
-
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
+}
+
+#page-home .content .img-background {
+	position: absolute;
+	z-index: -1;
+	background: url('../../assets/home-background.svg') no-repeat right bottom;
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out;
+}
+
+#page-home .content,
+#page-home .content .img-background {
+	width: 100%;
+	height: 100%;
+	max-width: 1600px;
+	margin: 0 auto;
+	padding: 0 30px;
 }
 
 #page-home .content header {
@@ -41,11 +51,12 @@
 	line-height: 38px;
 }
 
-#page-home .content main a, button {
+#page-home .content main a,
+button {
 	width: 100%;
 	max-width: 360px;
 	height: 64px;
-	
+
 	border-radius: 8px;
 	border: 0;
 	text-decoration: none;
@@ -55,7 +66,7 @@
 	overflow: hidden;
 	outline-style: none;
 
-	position: relative;	
+	position: relative;
 	cursor: pointer;
 }
 
@@ -69,13 +80,14 @@
 	margin-top: 20px;
 }
 
-#page-home .content main a span, button span {	
+#page-home .content main a span,
+button span {
 	width: 64px;
 	height: 64px;
 
 	display: flex;
 	align-items: center;
-	justify-content: center;  
+	justify-content: center;
 
 	transition: width 0.2s;
 }
@@ -84,17 +96,19 @@
 	background: rgba(0, 0, 0, 0.16);
 }
 
-#page-home .content main .buttonOpenSearch span {	
+#page-home .content main .buttonOpenSearch span {
 	background: rgba(0, 0, 0, 0.08);
 }
 
-#page-home .content main a span svg, .buttonOpenSearch span svg {
+#page-home .content main a span svg,
+.buttonOpenSearch span svg {
 	color: #FFF;
 	width: 20px;
 	height: 20px;
 }
 
-#page-home .content main a strong, .buttonOpenSearch strong {
+#page-home .content main a strong,
+.buttonOpenSearch strong {
 	flex: 1;
 	text-align: center;
 	font-size: 16px;
@@ -102,23 +116,36 @@
 	color: #FFF;
 
 	left: 50%;
-  transition: color 0.2s, left 0.2s;
+	transition: color 0.2s, left 0.2s;
 }
 
-#page-home .content main a:hover span, .buttonOpenSearch:hover span {	
+#page-home .content main a:hover span,
+.buttonOpenSearch:hover span {
 	width: 100%;
 }
 
-#page-home .content a:hover strong, .buttonOpenSearch:hover strong {
+#page-home .content a:hover strong,
+.buttonOpenSearch:hover strong {
 	color: rgba(0, 0, 0, 0.0);
-  position: absolute;
-  left: 100%;
+	position: absolute;
+	left: 100%;
+}
+
+@media (max-width: 1200px) {
+	#page-home .content .img-background {
+		background-size: 70%;
+	}
 }
 
 @media(max-width: 900px) {
 	#page-home .content {
 		align-items: center;
 		text-align: center;
+	}
+
+	#page-home .content .img-background {
+		opacity: 0;
+		transition: opacity 0.5s ease-in-out;
 	}
 
 	#page-home .content header {
